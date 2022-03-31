@@ -11,6 +11,12 @@
 <p>le résultat donc est une matrice de N colonnes represantans le nombre de séquence; et de M lignes représantant le nombre d'élements dans une séquence </p>
 <p>l'affichage se fait de la manière suivante:</p>
 <img src="ak_display.png" />
-<p> Et donne le résultat suivant suivant:</p>
+<p> Et donne le résultat suivant pour 6 séquence d'une trame de 8 bits :</p>
 <img src="ak_sequence.png" />
+<p>les signaux a transmettre doivent etre surechantilloné selon le critère de Shanon</p>
+<img src="upsample.png" />
+<p>les séquences echantillonés seront de la forme suivante</p>
+<img src="upsampled.png" />
+
+
 
