@@ -11,8 +11,8 @@ end
 
 Tb = 0.1; %period of a bit
 M =6 ;%length of the message
-N = 6; %number of messages
-Beta = 5;
+N = 4; %number of messages
+Beta = 16;
 Tn = Tb/Beta %period of sampling
 
 ak = a_generator(M,N);
@@ -60,12 +60,9 @@ filter_range = ((-L*Tb):Tn:(L*Tb));
 for i=1:N 
   %subplot(N,1,i);
   figure(2+i)
-  
   carrier(i,:) = cos((4*pi*(i-1)/Tb).*filter_range);
-  
   pn = filterr.*carrier(i,:);
   plot(filter_range,pn);  
-  
 end
 
 %carrier(2,:) = cos((4*pi*1000/Tb)*filter_range);
