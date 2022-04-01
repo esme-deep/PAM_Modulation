@@ -51,3 +51,13 @@
   width: 100%;"/>
 
 <h3 style="color:pink" > Produit de convolution</h3>
+<p>La convolution en domaine temporelle est fait gràce à la fonction conv de matlab</p>
+<img src="images/conv.png" style ="display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;"/>
+  <p>Et ça donne le résultat suivant pour la deuxième séquence </p>
+  <img src="images/convolution.png" style ="display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;"/>

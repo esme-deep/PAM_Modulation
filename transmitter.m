@@ -13,7 +13,7 @@ Tb = 0.1; %period of a bit
 
 M =6 ;%length of the message
 N = 4; %number of messages
-Beta = 30;
+Beta = 100;
 Tn = Tb/Beta %period of sampling
 
 ak = a_generator(M,N);
@@ -74,8 +74,8 @@ carrier(2,:) = cos((4*pi*1000/Tb)*filter_range);
 p2 = filterr.*carrier(2,:);
 temp(2,:) = upsampledsignal(:,2);
 output(2,:)= conv(p2,temp(2,:));
-size = columns(output(2,:)) 
-t =(-Tn*size/2:Tn:Tn*size/2)
+size = columns(output(2,:)) -1;
+t =(-Tn*size/2:Tn:Tn*size/2);
 output(2,:);
 figure(10);
 plot(t,output(2,:));
