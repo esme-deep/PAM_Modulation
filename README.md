@@ -50,3 +50,4 @@
   margin-right: auto;
   width: 100%;"/>
 
+<h3 style="color:pink" > Produit de convolution</h3>

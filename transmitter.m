@@ -1,5 +1,5 @@
 %generate random sequences ak  ak = round(rand(10,3))*2 - 1%
-
+clear all
 
 nb_elements= 10; %M
 nb_sequences= 3 ; %n
@@ -10,9 +10,10 @@ end
 
 
 Tb = 0.1; %period of a bit
+
 M =6 ;%length of the message
 N = 4; %number of messages
-Beta = 16;
+Beta = 30;
 Tn = Tb/Beta %period of sampling
 
 ak = a_generator(M,N);
@@ -65,10 +66,16 @@ for i=1:N
   plot(filter_range,pn);  
 end
 
-%carrier(2,:) = cos((4*pi*1000/Tb)*filter_range);
+carrier(2,:) = cos((4*pi*1000/Tb)*filter_range);
 %carrier(3,:) = cos((4*pi/Tb)*filter_range);
 %figure(4)
-%plot(filter_range,filterr.*carrier(3,:),filter_range,filterr); 
+%plot(filter_range,filterr.*carrier(3,:),filter_range,filterr);
 
- 
-
+p2 = filterr.*carrier(2,:);
+temp(2,:) = upsampledsignal(:,2);
+output(2,:)= conv(p2,temp(2,:));
+size = columns(output(2,:)) 
+t =(-Tn*size/2:Tn:Tn*size/2)
+output(2,:);
+figure(10);
+plot(t,output(2,:));
