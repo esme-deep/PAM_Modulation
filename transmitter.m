@@ -18,8 +18,7 @@ Tn = Tb/Beta %period of sampling
 
 ak = a_generator(M,N);
 TIME=0:Tb:((M-1)*Tb) %time axis from 0 to (m-1)*tb with tb step
-
-figure(1) %draw the N random sequences
+ %draw the N random sequences
 for i=1:N 
   subplot(N,1,i)
   stem(TIME,ak(:,i),'*')
@@ -71,11 +70,14 @@ carrier(2,:) = cos((4*pi*1000/Tb)*filter_range);
 %figure(4)
 %plot(filter_range,filterr.*carrier(3,:),filter_range,filterr);
 
-p2 = filterr.*carrier(2,:);
+p2 = filterr.*carrier(3,:);
 temp(2,:) = upsampledsignal(:,2);
 output(2,:)= conv(p2,temp(2,:));
 size = columns(output(2,:)) -1;
-t =(-Tn*size/2:Tn:Tn*size/2);
+t =(0:Tn:Tn*size);
 output(2,:);
 figure(10);
 plot(t,output(2,:));
+
+figure(11)
+channel(ak(:,i),Tb,M,0.7);
