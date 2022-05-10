@@ -13,7 +13,7 @@ Tb = 0.1; %period of a bit
 
 M =6 ;%length of the message
 N = 4; %number of messages
-Beta = 100;
+Beta = 50;
 Tn = Tb/Beta %period of sampling
 
 ak = a_generator(M,N);
@@ -70,14 +70,27 @@ carrier(2,:) = cos((4*pi*1000/Tb)*filter_range);
 %figure(4)
 %plot(filter_range,filterr.*carrier(3,:),filter_range,filterr);
 
-p2 = filterr.*carrier(3,:);
+p2 = filterr.*carrier(2,:);
 temp(2,:) = upsampledsignal(:,2);
 output(2,:)= conv(p2,temp(2,:));
 size = columns(output(2,:)) -1;
 t =(0:Tn:Tn*size);
 output(2,:);
 figure(10);
-plot(t,output(2,:));
+plot(output(2,:),'Linewidth',0.02,'-');
+title('Signal 2 convolué');
+xlabel('temps en secondes');
+ylabel('Amplitude');
 
+%figure(11)
+%channel(output(2,:),Tn,0.7);
+
+
+
+
+
+channel_effect = channel(output(2,:),10,0.7,10);
+noise = 0.03*randn(1,columns(channel_effect));
 figure(11)
-channel(ak(:,i),Tb,M,0.7);
+plot(channel_effect+noise,'Linewidth',0.02,'r-',output(2,:),'Linewidth',0.02,'b-');
+

@@ -24,13 +24,12 @@
 
 %% recepteur recoit un seul bruit : donc faut faire la somme des signaus atténués puis ajouter un bruit a tout
 
-function y = channel(Sn,Tb,M,alpha)
-  time = 0:Tb:((M-1)*Tb);
-  tau_n = Tb/10;
-  time_shifted = tau_n:Tb:((M-1)*Tb) + tau_n;
-  plot(time,Sn,'*');
-  hold on
-  plot(time_shifted,alpha*Sn,'*');
-  hold off
-end
+
+
+
+function y = channel(Sn,gamma,alpha,beta)
+  Tau_n = round(rand(1,1)*200);
+  delai = zeros(1,Tau_n)+0.01;
+  y = alpha*[delai,Sn];
+  end
 
