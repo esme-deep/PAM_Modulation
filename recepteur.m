@@ -2,9 +2,10 @@ Tb = 0.1; %period of a bit
 
 M =6 ;%length of the message
 N = 4; %number of messages
-Beta = 50;
+Beta = 100;
 Tn = Tb/Beta %period of sampling
 Alpha = 0.4
+L     = 10;
 R     =1000; %débit binaire
 gamma =10;
 Ta = Tn/gamma; % durée d'échantillon analogique
@@ -13,15 +14,14 @@ Bp=(1+Alpha)/(2*Tb);
 maxOFTau_n = 200;
 Lr=gamma*Beta*(M+2*L)+ maxOFTau_n;
 
-Ordre = 6;
+Ordre = 3;
 
 Matrice_Filtre = zeros(Lr,N);
 requence_Filtre = Freq_a/2*(0:1:(Lr-1))/Lr;
     for i = 1:N
-        
         if( i == 1)
             
-            [b,a] = cheby1(Ordre_Filtre,0.5,Bp,'low','s');
+            [b,a] = cheby1(Ordre,0.5,Bp,'low','s');
             
         else if ( i > 1)
                 
