@@ -28,7 +28,7 @@
 
 
 function y = channel(Sn,gamma,alpha,beta)
-  Tau_n = round(rand(1,1)*200);
+  Tau_n = round(rand(1,1)*100);
   delai = zeros(1,Tau_n)+0.01;
   y = alpha*[delai,Sn];
   end

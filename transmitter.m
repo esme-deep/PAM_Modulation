@@ -15,6 +15,8 @@ M =6 ;%length of the message
 N = 4; %number of messages
 Beta = 50;
 Tn = Tb/Beta %period of sampling
+Alpha = 0.4
+R     =1000; %débit binaire
 
 ak = a_generator(M,N);
 TIME=0:Tb:((M-1)*Tb) %time axis from 0 to (m-1)*tb with tb step
@@ -59,25 +61,28 @@ filter_range = ((-L*Tb):Tn:(L*Tb));
 
 for i=1:N 
   %subplot(N,1,i);
-  figure(2+i)
+  %figure(2+i)
   carrier(i,:) = cos((4*pi*(i-1)/Tb).*filter_range);
   pn = filterr.*carrier(i,:);
-  plot(filter_range,pn);  
+  %plot(filter_range,pn);  
+  p(i,:) = filterr.*carrier(i,:);
+  temp(i,:) = upsampledsignal(:,i);
+  output(i,:)= conv(p(i,:),temp(i,:));
+  figure(2+i)
+  plot(output(i,:));
+  
 end
 
-carrier(2,:) = cos((4*pi*1000/Tb)*filter_range);
+%carrier(2,:) = cos((4*pi*1000/Tb)*filter_range);
 %carrier(3,:) = cos((4*pi/Tb)*filter_range);
 %figure(4)
 %plot(filter_range,filterr.*carrier(3,:),filter_range,filterr);
 
-p2 = filterr.*carrier(2,:);
-temp(2,:) = upsampledsignal(:,2);
-output(2,:)= conv(p2,temp(2,:));
-size = columns(output(2,:)) -1;
+
+size = columns(output(1,:)) -1;
 t =(0:Tn:Tn*size);
-output(2,:);
 figure(10);
-plot(output(2,:),'Linewidth',0.02,'-');
+plot(output(1,:),'Linewidth',0.02,'-');
 title('Signal 2 convolué');
 xlabel('temps en secondes');
 ylabel('Amplitude');
@@ -93,4 +98,16 @@ channel_effect = channel(output(2,:),10,0.7,10);
 noise = 0.03*randn(1,columns(channel_effect));
 figure(11)
 plot(channel_effect+noise,'Linewidth',0.02,'r-',output(2,:),'Linewidth',0.02,'b-');
+title('Signal 2 convolué et passé par le canal');
+xlabel('temps en secondes');
+ylabel('Amplitude');
 
+Bp=(1+Alpha)/(2*Tb);
+wn = 4*pi*(i-1)*R;
+Vfreq=(1:(wn)/(2*pi)+Bp)/140:(wn/(2*pi)+Bp);
+
+
+for i=1:N 
+ fft_signal(i,:) = abs(fft(output(i,:)));
+ 
+end
